@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipper Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="logo">Shipper</h1>
+        <form id="userForm">
+            <div class="form-section" id="basicDetails">
+                <h2>Basic Details</h2>
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+                <button type="button" onclick="nextSection('shipmentDetails')">Next</button>
+                <a href="shipmentDetails.html">Next</a>
+            </div>
+
+
+            <div class="form-section" id="shipmentDetails" style="display:none;">
+                <h2>Shipment Details</h2>
+                <label for="item">Item:</label>
+                <input type="text" id="item" required>
+                <label for="weight">Weight:</label>
+                <input type="number" id="weight" required>
+                <button type="button" onclick="nextSection('shipperAddress')">Next</button>
+            </div>
+
+            <div class="form-section" id="shipperAddress" style="display:none;">
+                <h2>Shipper Address</h2>
+                <label for="shipperAddress">Address:</label>
+                <input type="text" id="shipperAddressInput" required>
+                <button type="button" onclick="nextSection('deliveryAddress')">Next</button>
+            </div>
+
+            <div class="form-section" id="deliveryAddress" style="display:none;">
+                <h2>Delivery Address</h2>
+                <label for="deliveryAddress">Address:</label>
+                <input type="text" id="deliveryAddressInput" required>
+                <button type="button" onclick="showPreview()">Preview</button>
+            </div>
+
+            <div class="form-section" id="preview" style="display:none;">
+                <h2>Preview</h2>
+                <div id="previewDetails"></div>
+                <button type="button" onclick="confirmDetails()">Confirm</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
