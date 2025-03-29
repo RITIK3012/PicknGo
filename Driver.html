@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deriver Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f9;
+    }
+    .stepper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 30px auto;
+      width: 90%;
+      max-width: 900px;
+    }
+    .step {
+      text-align: center;
+      position: relative;
+    }
+    .step::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: -50%;
+      width: 100%;
+      height: 3px;
+      background-color: #ddd;
+      z-index: -1;
+    }
+    .step:first-child::before {
+      display: none;
+    }
+    .step-circle {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 50%;
+      margin: 0 auto;
+    }
+    .step-title {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #333;
+    }
+    form {
+      width: 90%;
+      margin: 20px auto;
+      max-width: 900px;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    .form-section {
+      display: none;
+    }
+    .form-section.active {
+      display: block;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+    .buttons button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .buttons .prev {
+      background-color: #ccc;
+      color: #333;
+    }
+    .buttons .next {
+      background-color: #007bff;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="stepper">
+    <div class="step">
+      <div class="step-circle">1</div>
+      <div class="step-title">Deriver Basic Details</div>
+    </div>
+    <div class="step">
+      <div class="step-circle">2</div>
+      <div class="step-title">Vehicle Details</div>
+    </div>
+    <div class="step">
+      <div class="step-circle">3</div>
+      <div class="step-title">Bank Details</div>
+    </div>
+    <div class="step">
+      <div class="step-circle">4</div>
+      <div class="step-title">Video eKYC Verification</div>
+    </div>
+    <div class="step">
+      <div class="step-circle">5</div>
+      <div class="step-title">Summary Preview</div>
+    </div>
+    <div class="step">
+      <div class="step-circle">6</div>
+      <div class="step-title">End</div>
+    </div>
+  </div>
+
+  <form id="deriverForm">
+    <!-- Step 1 -->
+    <div class="form-section active">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" required>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="form-section">
+      <div class="form-group">
+        <label for="vehicle-number">Vehicle Number:</label>
+        <input type="text" id="vehicle-number" name="vehicle-number" required>
+      </div>
+      <div class="form-group">
+        <label for="vehicle-type">Vehicle Type:</label>
+        <input type="text" id="vehicle-type" name="vehicle-type" required>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="form-section">
+      <div class="form-group">
+        <label for="bank-name">Bank Name:</label>
+        <input type="text" id="bank-name" name="bank-name" required>
+      </div>
+      <div class="form-group">
+        <label for="account-number">Account Number:</label>
+        <input type="text" id="account-number" name="account-number" required>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="form-section">
+      <div class="form-group">
+        <button>
+            <h2>
+        <a href="videoekyc.html">Video eKYC</a>
+    </h2>
+    </button>
+        
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="form-section">
+      <p>Review your details and ensure everything is correct before submitting.</p>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="form-section">
+      <p>Thank you! Your details have been submitted successfully.</p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="buttons">
+      <button type="button" class="prev" onclick="changeStep(-1)">Previous</button>
+      <button type="button" class="next" onclick="changeStep(1)">Next</button>
+    </div>
+  </form>
+
+  <script>
+    const steps = document.querySelectorAll('.step');
+    const formSections = document.querySelectorAll('.form-section');
+    let currentStep = 0;
+
+    function changeStep(step) {
+      formSections[currentStep].classList.remove('active');
+      currentStep += step;
+      if (currentStep < 0) currentStep = 0;
+      if (currentStep >= formSections.length) currentStep = formSections.length - 1;
+      formSections[currentStep].classList.add('active');
+      updateStepper();
+    }
+
+    function updateStepper() {
+      steps.forEach((step, index) => {
+        if (index <= currentStep) {
+          step.querySelector('.step-circle').style.backgroundColor = '#007bff';
+        } else {
+          step.querySelector('.step-circle').style.backgroundColor = '#ddd';
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
